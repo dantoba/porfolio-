@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oloruntoba Daniel | Frontend Developer & Copywriter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== COLORS: edit here ===== */
+:root{
+  --bg:#f7f9ff; --surface:#ffffff; --text:#14183a; --muted:#5b6188;
+  --blue:#2457f5; --purple:#7c4dff; --line:#e0e6fa;
+  --grad:linear-gradient(135deg,var(--blue),var(--purple));
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#0e1124;--surface:#171b36;--text:#eef0ff;--muted:#9aa1cc;--line:#2a2f57}
+}
+:root[data-theme="dark"]{--bg:#0e1124;--surface:#171b36;--text:#eef0ff;--muted:#9aa1cc;--line:#2a2f57}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6}
+h1,h2,h3{font-family:'Sora',system-ui,sans-serif;line-height:1.15}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:28px}
+:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+
+/* Navbar */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:'Sora';font-weight:800}
+.links{display:flex;gap:24px;align-items:center}
+.links a{color:var(--muted);font-weight:500}.links a:hover{color:var(--blue)}
+.burger{display:none;background:none;border:0;font-size:1.6rem;color:var(--text);cursor:pointer}
+@media(max-width:720px){
+  .burger{display:block}
+  .links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg);padding:20px;border-bottom:1px solid var(--line)}
+  .links.open{display:flex}
+}
+
+/* Hero */
+.hero{padding:96px 0 72px}
+.hero h1{font-size:clamp(2.4rem,8vw,4.6rem);font-weight:800;letter-spacing:-.03em}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.role{margin:14px 0 8px;font-weight:600;color:var(--purple);font-size:1.1rem}
+.tag{max-width:520px;color:var(--muted);font-size:1.1rem}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{padding:13px 24px;border-radius:12px;font-weight:600;border:2px solid transparent;cursor:pointer;font:inherit;font-weight:600;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.pri{background:var(--grad);color:#fff}
+.btn.sec{border-color:var(--blue);color:var(--blue);background:transparent}
+
+/* About */
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.skills li{list-style:none;padding:8px 16px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-weight:500}
+#about p{max-width:640px;color:var(--muted)}
+
+/* Projects */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.card h3{font-size:1.1rem}.card p.d{color:var(--muted);font-size:.95rem}
+.card.accent{border-top:4px solid var(--purple)}
+.demo{margin-top:auto;padding-top:6px}
+input[type=text],input[type=number]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit}
+.mini{padding:10px 14px;border:0;border-radius:10px;background:var(--grad);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.row{display:flex;gap:8px}
+
+/* Calculator */
+.disp{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:right;font-family:'Sora';font-size:1.5rem;min-height:52px;overflow:hidden}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.keys button{padding:12px 0;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-weight:600;font-size:1.05rem;cursor:pointer}
+.keys button.op{background:var(--blue);color:#fff;border-color:var(--blue)}
+.keys button.clr{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+/* Todo */
+#todoList{list-style:none;padding:0;margin-top:10px;max-height:150px;overflow:auto}
+#todoList li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer}
+#todoList li.done span{text-decoration:line-through;color:var(--muted)}
+#todoList button{background:none;border:0;color:#d33;cursor:pointer;font-size:1.1rem}
+.big{font-family:'Sora';font-size:2.4rem;font-weight:800;text-align:center}
+
+/* Contact */
+.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.contact{display:flex;gap:16px;align-items:center;padding:22px;border-radius:16px;background:var(--surface);border:1px solid var(--line);transition:transform .15s,border-color .15s}
+.contact:hover{transform:translateY(-3px);border-color:var(--purple)}
+.contact svg{width:34px;height:34px;flex:none}
+.contact b{display:block;font-family:'Sora'}.contact small{color:var(--muted);word-break:break-all}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a:hover{color:var(--blue)}
+
+/* Floating WhatsApp */
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 8px 24px rgba(37,211,102,.45);z-index:30}
+.fab svg{width:30px;height:30px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#top" class="logo">Daniel.</a>
+  <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+  <div class="links" id="links">
+    <a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+    <button class="btn sec" id="themeBtn" style="padding:6px 14px">Dark mode</button>
+  </div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <!-- EDIT: name, title, tagline -->
+  <h1>Hi, I'm <span>Oloruntoba Daniel</span></h1>
+  <p class="role">Frontend Developer &amp; Copywriter</p>
+  <p class="tag">I turn ideas into simple, interactive web experiences, and words that make people act.</p>
+  <div class="btns">
+    <a class="btn pri" href="#projects">View Projects</a>
+    <a class="btn sec" href="#contact">Contact Me</a>
+  </div>
+</div></header>
+
+<section id="about"><div class="wrap">
+  <h2>About me</h2>
+  <!-- EDIT: bio -->
+  <p>I'm Daniel, a frontend developer based in Lagos, Nigeria. I build responsive websites and small projects while constantly learning, improving, and exploring new ways to create better digital experiences.</p>
+  <ul class="skills"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive design</li><li>Copywriting</li><li>Git</li></ul>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2>Projects you can try</h2>
+  <div class="grid">
+
+    <div class="card accent"><h3>Calculator</h3><p class="d">Add, subtract, multiply, divide.</p>
+      <div class="demo"><div class="disp" id="cd">0</div>
+        <div class="keys" id="keys"></div></div></div>
+
+    <div class="card accent"><h3>To-do list</h3><p class="d">Add tasks, tap to complete, delete.</p>
+      <div class="demo"><div class="row"><input type="text" id="todoIn" placeholder="New task"><button class="mini" id="todoAdd">Add</button></div>
+        <ul id="todoList"></ul></div></div>
+
+    <div class="card accent"><h3>Digital clock</h3><p class="d">Live local time.</p>
+      <div class="demo"><div class="big" id="clock">--:--:--</div></div></div>
+
+    <div class="card accent"><h3>Counter</h3><p class="d">Count up, down, or reset.</p>
+      <div class="demo"><div class="big" id="cnt">0</div>
+        <div class="row" style="margin-top:10px;justify-content:center">
+          <button class="mini" id="dec">-</button><button class="mini" id="rst">Reset</button><button class="mini" id="inc">+</button></div></div></div>
+
+    <div class="card accent"><h3>Tip calculator</h3><p class="d">Bill plus tip, split between people.</p>
+      <div class="demo"><div class="row"><input type="number" id="bill" placeholder="Bill" min="0"><input type="number" id="pct" placeholder="Tip %" value="10" min="0"></div>
+        <p style="margin-top:10px">Total: <b id="tipTotal">0.00</b></p></div></div>
+
+    <div class="card accent"><h3>Quote generator</h3><p class="d">A fresh line of motivation.</p>
+      <div class="demo"><p id="quote" style="min-height:56px;font-style:italic">Click the button.</p>
+        <button class="mini" id="qBtn">New quote</button></div></div>
+
+  </div>
+  <p class="d" style="margin-top:20px;color:var(--muted)">The dark mode switch in the menu is project #7: it changes the whole site.</p>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2>Let's work together</h2>
+  <div class="contacts">
+    <!-- EDIT: WhatsApp link -->
+    <a class="contact" href="https://wa.me/2349164495151?text=Hello%20I%20saw%20your%20portfolio" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="#25d366"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.200-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.5-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 1.900c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.200 1 2.100 1.300 2.400 1.500.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.800.9c.3.100.5.200.5.300.1.200.1.800-.2 1.400Z"/></svg>
+      <div><b>WhatsApp</b><small>+234 916 449 5151</small></div></a>
+    <!-- EDIT: email link -->
+    <a class="contact" href="mailto:tobaoflagos47@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#7c4dff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      <div><b>Email</b><small>tobaoflagos47@gmail.com</small></div></a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>&copy; <span id="yr"></span> Oloruntoba Daniel</span>
+  <span><a href="https://wa.me/2349164495151?text=Hello%20I%20saw%20your%20portfolio" target="_blank" rel="noopener">WhatsApp</a> &nbsp;|&nbsp; <a href="mailto:tobaoflagos47@gmail.com">Email</a></span>
+</div></footer>
+
+<a class="fab" href="https://wa.me/2349164495151?text=Hello%20I%20saw%20your%20portfolio" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.200-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.5-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 1.900c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.200 1 2.100 1.300 2.400 1.500.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.800.9c.3.100.5.200.5.300.1.200.1.800-.2 1.400Z"/></svg>
+</a>
+
+<script>
+const $=id=>document.getElementById(id);
+$('yr').textContent=new Date().getFullYear();
+
+/* Mobile menu */
+$('burger').onclick=()=>$('links').classList.toggle('open');
+$('links').onclick=e=>{if(e.target.tagName==='A')$('links').classList.remove('open')};
+
+/* Dark / light mode */
+const root=document.documentElement;
+function isDark(){const t=root.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+function setBtn(){$('themeBtn').textContent=isDark()?'Light mode':'Dark mode'}
+$('themeBtn').onclick=()=>{root.dataset.theme=isDark()?'light':'dark';setBtn()};
+setBtn();
+
+/* Calculator */
+let cur='0',prev=null,op=null,fresh=false;
+const layout=['C','/','*','-','7','8','9','+','4','5','6','=','1','2','3','0','.'];
+const kb=$('keys');
+['7','8','9','/','4','5','6','*','1','2','3','-','0','.','C','+'].forEach(k=>{
+  const b=document.createElement('button');b.textContent=k==='*'?'x':k;
+  if('/*-+'.includes(k))b.className='op';if(k==='C')b.className='clr';
+  b.onclick=()=>press(k);kb.appendChild(b);
+});
+const eq=document.createElement('button');eq.textContent='=';eq.className='op';eq.style.gridColumn='span 4';eq.onclick=()=>press('=');kb.appendChild(eq);
+function calc(){const a=parseFloat(prev),b=parseFloat(cur);
+  if(op==='+')return a+b;if(op==='-')return a-b;if(op==='*')return a*b;
+  if(op==='/')return b===0?'Error':a/b;return b}
+function show(){$('cd').textContent=String(cur).slice(0,12)}
+function press(k){
+  if(cur==='Error')cur='0';
+  if(k==='C'){cur='0';prev=null;op=null}
+  else if(k==='.'){if(fresh){cur='0';fresh=false}if(!cur.includes('.'))cur+='.'}
+  else if('+-*/'.includes(k)){if(op&&!fresh){cur=String(calc());}prev=cur;op=k;fresh=true}
+  else if(k==='='){if(op){cur=String(+parseFloat(calc()).toFixed(8)||calc());prev=null;op=null;fresh=true}}
+  else{if(fresh||cur==='0'){cur=k;fresh=false}else cur+=k}
+  show();
+}
+
+/* To-do list */
+function addTodo(){
+  const v=$('todoIn').value.trim();if(!v)return;
+  const li=document.createElement('li');
+  const s=document.createElement('span');s.textContent=v;
+  const x=document.createElement('button');x.textContent='\u00D7';x.setAttribute('aria-label','Delete');
+  li.onclick=()=>li.classList.toggle('done');
+  x.onclick=e=>{e.stopPropagation();li.remove()};
+  li.append(s,x);$('todoList').appendChild(li);$('todoIn').value='';
+}
+$('todoAdd').onclick=addTodo;
+$('todoIn').onkeydown=e=>{if(e.key==='Enter')addTodo()};
+
+/* Clock */
+setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString()},1000);
+$('clock').textContent=new Date().toLocaleTimeString();
+
+/* Counter */
+let n=0;const upd=()=>$('cnt').textContent=n;
+$('inc').onclick=()=>{n++;upd()};$('dec').onclick=()=>{n--;upd()};$('rst').onclick=()=>{n=0;upd()};
+
+/* Tip calculator */
+function tip(){const b=+$('bill').value||0,p=+$('pct').value||0;$('tipTotal').textContent=(b+b*p/100).toFixed(2)}
+$('bill').oninput=tip;$('pct').oninput=tip;
+
+/* Quotes */
+const quotes=["Small steps every day add up to big results.","Build it simple, then make it better.","Done is better than perfect.","Every expert was once a beginner.","Code a little, learn a lot."];
+$('qBtn').onclick=()=>{$('quote').textContent=quotes[Math.floor(Math.random()*quotes.length)]};
+</script>
+</body>
+</html>
